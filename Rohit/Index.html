@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Eternal Valentine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --rose: #ff4d6d;
+            --deep-wine: #2b0008;
+            --gold: #ffb703;
+            --glass: rgba(255, 255, 255, 0.07);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle at center, #3d000c 0%, #1a0005 100%);
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sparkle Cursor Trail */
+        .sparkle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: var(--gold);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 999;
+            animation: glitter 0.8s linear forwards;
+        }
+        @keyframes glitter { 0% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(3); } }
+
+        /* Floating Hearts Animation */
+        .heart {
+            position: absolute;
+            color: var(--rose);
+            filter: drop-shadow(0 0 8px var(--rose));
+            pointer-events: none;
+            z-index: 1;
+            animation: floatUp 6s linear forwards;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(110vh) scale(0.5) rotate(0deg); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1.5) rotate(360deg); opacity: 0; }
+        }
+
+        /* Elegant Glass Card */
+        .card {
+            position: relative;
+            z-index: 10;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            padding: 50px 30px;
+            border-radius: 60px 5px 60px 5px; /* Aesthetic asymmetrical corners */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            width: 85%;
+            max-width: 450px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            transition: all 1s ease-in-out;
+        }
+
+        h1 { font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: var(--rose); margin: 0; text-shadow: 0 0 15px rgba(255, 77, 109, 0.5); }
+        
+        input {
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid var(--rose);
+            padding: 15px;
+            border-radius: 50px;
+            color: white;
+            text-align: center;
+            width: 80%;
+            font-size: 1.1rem;
+            margin: 25px 0;
+            outline: none;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        /* Pulsing Heart Unlock Button */
+        #unlockBtn {
+            background: var(--rose);
+            color: white;
+            border: none;
+            padding: 15px 45px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 20px var(--rose);
+            animation: heartbeat 1.5s infinite;
+        }
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.08); box-shadow: 0 0 30px var(--rose); }
+            100% { transform: scale(1); }
+        }
+
+        /* Reveal Section */
+        #main-content {
+            display: none;
+            opacity: 0;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .love-letter {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2rem;
+            line-height: 1.4;
+            color: #ffe5ec;
+            margin: 20px 0;
+        }
+
+        /* Big Aesthetic Photos */
+        .photo-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            align-items: center;
+            margin-top: 30px;
+        }
+        .photo-gallery img {
+            width: 100%;
+            max-width: 320px;
+            border: 5px solid #fff;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            transform: rotate(-2deg);
+            transition: 0.5s;
+        }
+        .photo-gallery img:nth-child(even) { transform: rotate(2deg); }
+        .photo-gallery img:hover { transform: scale(1.05) rotate(0deg); }
+
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-thumb { background: var(--rose); border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+    <audio id="romanticSong" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="heart-bg"></div>
+
+    <div class="card" id="login-screen">
+        <h1>For You...</h1>
+        <p style="opacity: 0.8; margin-top: 10px;">A secret message awaits.</p>
+        <input type="password" id="passInput" placeholder="whats your name">
+        <br>
+        <button id="unlockBtn" onclick="unlock()">Unlock My Heart ❤️</button>
+        <p id="error" style="color: var(--gold); display: none; margin-top: 15px; font-size: 0.9rem;">Try again, my love...</p>
+    </div>
+
+    <div class="card" id="main-content">
+        <h1>Happy Valentine's Day! 🌹</h1>
+        <div class="love-letter">
+            Hi, thanks for eveything. you are everything in my life.
+            my missing piece you completes me in everyway.
+            feeling very happy today.. and jab yeb pad rhi ho tab meri taraf dekhna thosa muskurake
+            only that is my true return gift your smile
+            I LOVE YOU            
+        </div>
+        
+        <div class="photo-gallery">
+            <img src="https://via.placeholder.com/400x500/d00000/ffffff?text=Our+First+Memory" alt="Memory 1">
+            <img src="https://via.placeholder.com/400x500/ffafcc/000000?text=Forever+Together" alt="Memory 2">
+        </div>
+
+        <p style="color: var(--gold); font-family: 'Great Vibes', cursive; font-size: 2.2rem; margin-top: 30px;">I'm yours, forever.</p>
+    </div>
+
+    <script>
+        const PASSWORD = "syrie";
+
+        function unlock() {
+            const input = document.getElementById('passInput').value.toLowerCase().trim();
+            const music = document.getElementById('romanticSong');
+
+            if(input === PASSWORD) {
+                // Play soft music
+                music.play().catch(e => console.log("Music blocked by browser settings."));
+
+                // Smooth Transition
+                document.getElementById('login-screen').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('login-screen').style.display = 'none';
+                    const main = document.getElementById('main-content');
+                    main.style.display = 'block';
+                    setTimeout(() => { main.style.opacity = '1'; }, 50);
+                }, 800);
+            } else {
+                document.getElementById('error').style.display = 'block';
+            }
+        }
+
+        // Floating Hearts Logic
+        function createHeart() {
+            const h = document.createElement('div');
+            h.classList.add('heart');
+            h.innerHTML = '❤️';
+            h.style.left = Math.random() * 100 + 'vw';
+            h.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            h.style.animationDuration = (Math.random() * 2 + 4) + 's';
+            document.getElementById('heart-bg').appendChild(h);
+            setTimeout(() => h.remove(), 6000);
+        }
+        setInterval(createHeart, 400);
+
+        // Sparkle Mouse Trail
+        function spawnSparkle(x, y) {
+            const s = document.createElement('div');
+            s.classList.add('sparkle');
+            s.style.left = x + 'px';
+            s.style.top = y + 'px';
+            document.body.appendChild(s);
+            psetTimeout(() => s.remove(), 800);
+        }
+        document.addEventListener('mousemove', (e) => spawnSparkle(e.pageX, e.pageY));
+        document.addEventListener('touchmove', (e) => spawnSparkle(e.touches[0].pageX, e.touches[0].pageY));
+
+        // Enter key support
+        document.getElementById('passInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') unlock();
+        });
+    </script>
+</body>
+</html>
